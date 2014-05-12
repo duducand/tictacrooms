@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<on-start>
+		<evaluate expression="estadoUsuario.checkLogin(currentUser.name)" result="conversationScope.estadoUsuario" />
+	</on-start>
+	
+	<action-state id="estaLogado">
+		<evaluate expression="estadoUsuario.usuario == null" />
+		<transition on="yes" to="salir" />
+		<transition on="no" to="fin" />
+	</action-state>
+	
+
+	
+	
+	<end-state id="salir" view="j_spring_security_logout" />
+
+	<end-state id="fin" />
+	
+</flow>

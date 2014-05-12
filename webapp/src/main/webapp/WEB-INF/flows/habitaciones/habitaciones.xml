@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<subflow-state id="login" subflow="login">
+		<transition on="fin" to="lista" />
+	</subflow-state>
+
+    <view-state id="lista" view="habitaciones">
+        <transition on="consultar"       to="consulta" />
+        <transition on="crear"           to="creacion" />
+        <transition on="editar"          to="edicion" />
+    </view-state>
+
+	<view-state id="consulta" view="habitaciones-consulta" model="habitacion">
+        <on-entry>
+            <evaluate expression="(currentEvent.attributes.habitacion == null) ? habitacionService.getHabitacion(currentEvent.attributes.id) : currentEvent.attributes.habitacion" result="viewScope.habitacion"/>
+        </on-entry>        
+        <transition on="volver" to="lista" bind="false" validate="false" />
+	</view-state>
+    
+    <view-state id="edicion" view="habitaciones-edicion" model="habitacion">
+        <on-entry>
+            <evaluate expression="(currentEvent.attributes.habitacion == null) ? habitacionService.getHabitacion(currentEvent.attributes.id) : currentEvent.attributes.habitacion" result="viewScope.habitacion"/>
+        </on-entry>
+        <transition on="guardar" to="edicion-guardar">
+             <set name="requestScope.habitacion" value="habitacion"/> 
+        </transition>
+        <transition on="cancelar"        to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    <view-state id="creacion" view="habitaciones-edicion" model="habitacion">
+        <on-entry>
+            <evaluate expression="habitacionService.createHabitacion()" result="viewScope.habitacion"/>
+        </on-entry>
+        <transition on="guardar" to="edicion-guardar">
+             <set name="requestScope.habitacion" value="habitacion"/> 
+        </transition>
+        <transition on="cancelar"        to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    <action-state id="edicion-guardar">
+        <evaluate expression="habitacionAction.saveHabitacion(habitacion, flowRequestContext)" />
+        <transition on="GUARDADO" to="lista" />
+        <transition on="ERROR" to="edicion" />
+    </action-state>
+    
+    <action-state id="solicitud">
+        <evaluate expression="habitacionAction.solicitarHabitacion(flowRequestContext)" />
+        <transition on="GUARDADO" to="lista" />
+        <transition on="ERROR_EXISTENTE" to="lista" />
+        <transition on="ERROR" to="lista" />
+    </action-state>
+
+    	<view-state id="excepcion" view="excepcion" />
+	
+	<global-transitions>
+		<transition on-exception="java.lang.Exception" to="excepcion" />
+	</global-transitions>
+	
+</flow>

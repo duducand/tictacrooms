@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/aop               http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/tx                http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc               http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/webflow-config    http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+        http://www.springframework.org/schema/security          http://www.springframework.org/schema/security/spring-security-3.0.xsd
+        http://www.springframework.org/schema/task              http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+<!-- Este archivo de configuracion contendrá las definiciones de beans (POJO's) usados por el DispatcherServlet de Spring-MVC. Es decir, este archivo es el WebApplicationContext donde situaremos todos los componentes. -->
+
+   <!-- Entradas para configuracion de spring-mvc: -->
+	<!-- Esta entrada se indica que las anotaiones de spring-mvc repartidas por el codigo las interpretan las 3 clases indicadas abajo  -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="order" value="1" />
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+     
+    <!-- Configuracion de Spring-mvc para escaner las anotaciones de MVC en el paquete indicado, que contiene las clases controllers para spring-mvc.  -->  
+    <context:component-scan base-package="es.duducand.tic.tac.rooms.web"/>
+
+    <!-- View resolver. Configuracion de Spring-mvc para indicar la clase que se va a encargar de resolver cuales son las vistas a mostrar. Si no se indica nada, spring pone uno por defecto. 
+    En nuestro caso le indicamos que vamos a utilizar Tiles, con lo indicamos la clase spring que va a cargar el fichero de configuracion de Tiles y la ubicacion del mismo -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tile-defs.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Configuracion de Spring-mvc: Indica la clase que implementa la logica de funcionamiento con tiles -->
+    <bean id="viewResolverTiles" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="order" value="1"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+    </bean>
+    
+    <!-- Configuracion de Spring-mvc: Sirve para indicar la localizacion de una vista o JSP. Si en algun punto del codigo se alude a una vista como miVista, con esto se deduce que nos referimos a /WEB-INF/jsp/miVista.jsp.
+    Se usa en este mismo fichero para completar el path que esta definido en todos los mvc:view-controller**. Indica que se debe poner o interpretar los view-name (nombres de las vistas o localizacion de los jsps) añadiendo el prefijo y el sufijo indicado. 
+    Esto permite independizar la vista (jsp) de los controladores. Nos referirnos a la vista en un controlador usando un nombre lógico, permitiéndonos intercambiar la vista sin tener que tocar codigo en el controlador. 
+    Tambien permite que en la misma vista (un jsp) una inclusion en el JSP de otra JSP no haya que poner el path completo. Es muy util cuando hay muchos jsp o js que incluir en los jsp. -->
+    <bean id="viewResolverWebMVC" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="2"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    
+    <!-- Esta entrada esta relacionada con el Views.xml del WEB-INF. Sirve para definir clases en el Views.xml que hacen ciertas cosas, como por ejemplo mostrar pdf o excel en pantalla -->
+    <bean id="viewResolverXml" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="3"/>
+    </bean>
+    
+  	<!-- ** Configuracion de Spring-mvc: este fichero se refiere al WEB-INF/jsp/tic-tac-rooms.js.jsp, pero con esto conseguimos que no haya que poner todo este path completo sino que se puede incluirse en un JSP unicamente usando el view-name. Aqui se podrian poner muchos mas de estos independizando el path completo donde se encuentran -->
+    <mvc:view-controller path="/tic-tac-rooms.js" view-name="tic-tac-rooms.js" />
+
+	<!-- Configurar el multipart para poder subir un ficheros. Esto es para subir las fotos  -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>    
+    
+    <!-- Message source. Para la internacionalizacion de la aplicacion. Esta configuracion indica que esta clase va a leer del fichero de configuracion messages.properties y sustituir el mensaje alli donde en una vista o JSP se use el tag <spring:message code=.. De esta manera cambiar los mensajes de la aplicacion a otra lengua es sencillo sin tocar codigo. -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+
+    <!-- Configuracion necesaria para cualquier poryecto con Web flow. Las entradas de a continuacion describen cuales son las clases que van a gestionar todo lo relacionado con web-flow -->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor" />
+    </bean>
+
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
+        <property name="order" value="2"/>
+    </bean>
+    
+    <webflow:flow-executor id="flowExecutor" />
+
+    <webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
+        <webflow:flow-location path="/WEB-INF/flows/login/login.xml" />        
+        <webflow:flow-location path="/WEB-INF/flows/usuarios/usuarios.xml" />
+        <webflow:flow-location path="/WEB-INF/flows/habitaciones/habitaciones.xml" />
+        <webflow:flow-location path="/WEB-INF/flows/micuenta/micuenta.xml" />
+    </webflow:flow-registry>
+    
+    
+    <webflow:flow-builder-services id="flowBuilderServices"
+            view-factory-creator="mvcViewFactoryCreator"
+            validator="webflowValidator"
+            expression-parser="webflowExpressionParser"/>
+
+    <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="viewResolvers">
+            <list>
+                <ref bean="viewResolverTiles" />
+                <ref bean="viewResolverXml" />
+                <ref bean="viewResolverWebMVC" />
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Esta configuracion es del spring-mvc para los validators usados en los formularios. Es necesario indicarle el messageSource porque ahi encuentra los mensajes de error -->
+    <bean id="webflowValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+    
+    <!-- Configuracion de Web-flow: "Expression parser" para que las listas se rellenen autom�ticamente al hacer el "binding" de los formularios -->
+    <bean id="expressionParser" class="org.springframework.expression.spel.standard.SpelExpressionParser">
+        <constructor-arg name="configuration">
+            <bean class="org.springframework.expression.spel.SpelParserConfiguration">
+                <constructor-arg name="autoGrowCollections" value="true" />
+                <constructor-arg name="autoGrowNullReferences" value="false" />
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="webflowExpressionParser" class="org.springframework.webflow.expression.spel.WebFlowSpringELExpressionParser">
+        <constructor-arg name="expressionParser" ref="expressionParser" />
+    </bean>    
+     
+    <!-- configuracion del webflow: Acciones para Web Flow, aqui simplemente se declaran los beans -->
+    <bean id="habitacionAction" class="es.duducand.tic.tac.rooms.action.HabitacionAction">
+        <property name="habitacionService" ref="habitacionService"/>
+    </bean>
+
+    <bean id="usuarioAction" class="es.duducand.tic.tac.rooms.action.UsuarioAction">
+        <property name="usuarioService" ref="usuarioService"/>
+    </bean>
+    
+    
+    
+    
+         
+    
+    <!-- configuracion mvc. Con esto se le indica cuales son las carpetas de los recursos. Luego el mvc podria cachearlas en memoria para no tener que leer -->
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+</beans>

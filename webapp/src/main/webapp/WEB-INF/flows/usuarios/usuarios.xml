@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<subflow-state id="login" subflow="login">
+		<transition on="fin" to="lista" />
+	</subflow-state>
+
+    <view-state id="lista" view="usuarios">
+        <transition on="crearSocio" to="creacionSocio" />
+        <transition on="crearTrabajador" to="creacionTrabajador" />
+        <transition on="consultar" to="consulta" />
+        <transition on="editar" to="edicion" />
+        <transition on="eliminar" to="eliminacion" />
+        <transition on="restaurar" to="reactivacion" />
+    </view-state>
+
+	<view-state id="consulta" view="usuarios-consulta" model="usuario">
+        <on-entry>
+            <evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.getUsuario(currentEvent.attributes.id) : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="volver" to="lista" bind="false" validate="false" />
+	</view-state>
+    
+    <view-state id="creacionSocio" view="usuarios-creacion" model="usuario">
+        <on-entry>
+        	<evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.createUsuarioSocio() : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="guardar" to="creacion-guardar-socio">
+        	<set name="requestScope.usuario" value="usuario"/>
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    <view-state id="creacionTrabajador" view="usuarios-creacion" model="usuario">
+        <on-entry>
+            <evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.createUsuarioTrabajador() : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="guardar" to="creacion-guardar-trabajador">
+            <set name="requestScope.usuario" value="usuario"/>
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    <action-state id="creacion-guardar-socio">
+       	<evaluate expression="usuarioAction.saveUsuario(usuario, flowRequestContext)" />
+       	<transition on="GUARDADO" to="lista" />
+       	<transition on="ERROR" to="creacionSocio" />
+    </action-state>
+    
+        <action-state id="creacion-guardar-trabajador">
+        <evaluate expression="usuarioAction.saveUsuario(usuario, flowRequestContext)" />
+        <transition on="GUARDADO" to="lista" />
+        <transition on="ERROR" to="creacionTrabajador" />
+    </action-state>
+    
+    <view-state id="edicion" view="usuarios-edicion" model="usuario">
+        <on-entry>
+        	<evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.getUsuario(currentEvent.attributes.id) : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="guardar" to="edicion-guardar">
+        	 <set name="requestScope.usuario" value="usuario"/> 
+        </transition>
+        <transition on="devolver" to="devolucion-guardar">
+            <set name="requestScope.usuario" value="usuario"/>
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    <view-state id="devolucion-guardar" view="usuarios-edicion" model="usuario">
+        <on-entry>
+            <evaluate expression="usuarioService.devolverContenidoUsuario(usuario)" />
+            <evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.getUsuario(currentEvent.attributes.id) : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="guardar" to="edicion-guardar">
+             <set name="requestScope.usuario" value="usuario"/> 
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+    </view-state>
+    
+    
+    <action-state id="edicion-guardar">
+       	<evaluate expression="usuarioAction.saveUsuario(usuario, flowRequestContext)" />
+       	<transition on="GUARDADO" to="lista" />
+       	<transition on="CODIGO_ACTIVO" to="edicion" />
+       	<transition on="CODIGO_BAJA" to="edicion" />
+    </action-state>
+    
+    <view-state id="reactivacion" view="usuarios-reactivacion" model="usuario">
+        <on-entry>
+            <evaluate expression="usuarioService.getUsuario(currentEvent.attributes.id)" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="reactivar" to="lista" bind="false" validate="false">
+        	<evaluate expression="usuarioAction.reactivarUsuario(usuario, flowRequestContext)" />
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+    </view-state>
+
+	<view-state id="eliminacion" view="usuarios-eliminacion" model="usuario">
+        <on-entry>
+            <evaluate expression="usuarioService.getUsuario(currentEvent.attributes.id)" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="eliminar" to="lista" bind="false" validate="false">
+        	<evaluate expression="usuarioAction.deleteUsuario(usuario, flowRequestContext)" />
+        </transition>
+        <transition on="cancelar" to="lista" bind="false" validate="false" />
+	</view-state>
+	    
+	<view-state id="excepcion" view="excepcion" />
+	
+	<global-transitions>
+		<transition on-exception="java.lang.Exception" to="excepcion" />
+	</global-transitions>
+	
+</flow>

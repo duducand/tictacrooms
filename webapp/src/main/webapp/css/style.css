@@ -1,0 +1,318 @@
+body, body.claro {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+}
+
+table, input, select {
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+}
+
+a {
+	color: black;
+	text-decoration: underline;
+}
+
+th {
+	text-align: left;
+}
+
+dt {
+	margin-top: 1ex;
+}
+
+dt big {
+	font-size: 120%;
+}
+
+dd ul {
+	padding-left: 0;
+	list-style-position: inside;
+}
+
+.separador1{
+	
+	width: 30px;
+	height: 30px;
+}
+
+
+.center {
+	text-align: center;
+}
+
+.fatal {
+	color: #D81E05;
+}	
+
+.error {
+	color: #D81E05;
+}
+.contenidoaudiovisual_pendiente{
+    color: red;
+}
+.naranja{
+    color: #DB7D26;
+}
+.warning {
+	color: #081E05;
+}
+
+.info {
+	color: #0084C9;
+}
+
+.predefinido {
+	font-size: 80%;
+	padding: 4px 8px;
+	color: #FFFFFF;
+	background: #0084C9;
+}
+	
+.activo {
+	font-size: 80%;
+	padding: 4px 8px;
+	color: #FFFFFF;
+	background: #D81E05;
+}
+
+#header {
+	background: #0084C9;
+	margin: 0;
+	padding: 10px;
+}
+
+#header h1 {
+	margin: 0;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+#header h1 .logo-tic-tac-rooms {
+	float: left;
+}
+
+#header h1 .titulo-tic-tac-rooms {
+    float: right;
+}
+
+#header .user {
+	float: right;
+	clear: right;
+	margin-bottom: 8px;
+}
+
+#header .user .status {
+	color: #FFFFFF;
+}
+
+#header .separator {
+	clear: both;
+	height: 10px;
+}
+
+#header .menubar ul {
+	clear: both;
+}
+
+#messages {
+	margin: 20px;
+	border: 1px solid silver;
+	padding: 0;
+}
+
+#messages .fatal {
+	margin: 10px;
+	padding: 0 0 0 32px;
+	min-height: 24px;	
+	background: url(../img/fatal.png) no-repeat 0 50%;
+	color: #D81E05;
+}
+
+#messages .error {
+	margin: 10px;
+	padding: 0 0 0 32px;
+	min-height: 24px;	
+	background: url(../img/error.png) no-repeat 0 50%;
+	color: #D81E05;
+}
+
+#messages .warning {
+	margin: 10px;
+	padding: 0 0 0 32px;
+	min-height: 24px;	
+	background: url(../img/error.png) no-repeat 0 50%;
+	color: #D81E05;
+}
+
+#messages .info {
+	margin: 10px;
+	padding: 0 0 0 32px;
+	min-height: 24px;	
+	background: url(../img/info.png) no-repeat 0 50%;
+	color: #0084C9;
+}
+
+#content {
+	padding-left: 20px;
+}
+
+#content table.filter, #content table.grid {
+	width: 100%;
+}
+
+#content table.filter td {
+	text-align: center;
+	padding: 2px 0px;
+}
+
+#content table.form {
+	width: 100%;
+}
+
+#content table.form th {
+	width: 0px;
+	white-space: nowrap;
+}
+
+#content table.form th span {
+	white-space: nowrap;
+}
+
+#content table.form td {
+	width: 100%;
+}
+
+#content table.configuracion {
+	width: 100%;
+}
+
+#content .buttons {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 2px solid #769DC0;
+	text-align: center;
+	margin-right: 20px;
+}
+
+#content .buttons_upper {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    /* border-bottom: 1px solid #0084C9; */
+    text-align: center;
+    width:80%;
+}
+
+#content .actions {
+	clear: both;
+}
+
+#content .actions .left {
+	display: block;
+	float: left;
+}
+	
+#content .actions .right {
+	display: block;
+	float: right;
+}
+
+#footer {
+	background: #0084C9;
+	margin: 0;
+	padding: 10px;
+}
+
+#footer .message {
+	color: #FFFFFF;
+	text-align: center;
+	font-style: italic;
+}
+
+.readonly {
+	background: #eee;
+}  
+table.permisos {
+	width: 500px;
+}
+table.permisos .op {
+	width: 15%;
+	text-align: center;
+}
+.customIconRecuperar{
+    background-image: url('../img/recycle.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconRestaurar{
+    background-image: url('../img/refresh.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconCrear{
+    background-image: url('../img/add.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconBorrar{
+    background-image: url('../img/delete.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconEditar{
+    background-image: url('../img/edit.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconPapelera{
+    background-image: url('../img/trash.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconShow {
+    background-image: url('../img/show.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconPlay {
+    background-image: url('../img/play.png');
+    width: 16px;
+    height: 16px;
+}
+.dijitDisabled .customIconShow {
+    background-image: url('../img/show_disabled.png');
+    width: 16px;
+    height: 16px;
+}
+.customIconAceptar{
+    background-image: url('../img/aceptar.png');
+    width: 16px;
+    height: 16px;
+}
+.dijitDisabled .customIconAceptar{
+    background-image: url('../img/aceptar_disabled.png');
+    width: 16px;
+    height: 16px;
+}
+.tabulado {
+    text-indent: 0.3cm;
+}
+.tic-tac-rooms .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabContent{
+    color:#DB7D26;
+    font-weight: bold;
+/*     -moz-border-radius: 6px 6px 0 0; */
+/*     -webkit-border-radius:6px 6px 0 0; */
+/*     border-radius:6px 6px 0 0; */
+}
+.tic-tac-rooms .dijitTabInnerDiv .dijitTabContent{
+    color:#769DC0;
+    font-weight: bold;
+}
+.tic-tac-rooms .dijitTabContainerTop-tabs .dijitTabContent {
+    min-width:30px;
+}
+.tic-tac-rooms .dijitTabContainer{
+    border:2px solid #769DC0;
+}

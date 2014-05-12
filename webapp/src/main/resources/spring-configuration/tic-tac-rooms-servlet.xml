@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/aop             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/tx              http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc             http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/webflow-config  http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+        http://www.springframework.org/schema/security        http://www.springframework.org/schema/security/spring-security-3.0.xsd
+        http://www.springframework.org/schema/task            http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <!-- AOP Inyección de interceptores de transacción de BDD y de seguridad -->
+    <aop:config>
+        <aop:pointcut id="entryPointMethod" expression="execution(* es.duducand.tic.tac.rooms.service.*Service.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="entryPointMethod"/>
+        <aop:advisor advice-ref="securityAdvice"    pointcut-ref="entryPointMethod"/>
+    </aop:config>
+    
+    <!-- Seguridad -->
+    <import resource="classpath:/spring-configuration/spring-context-seguridad.xml"/>
+	 
+    <!-- Acceso a datos -->
+	<import resource="classpath:/spring-configuration/spring-context-database.xml"/>
+	
+    <!-- Service -->
+    <bean id="habitacionService" class="es.duducand.tic.tac.rooms.service.impl.HabitacionServiceImpl">
+        <property name="estadoUsuario" ref="estadoUsuario"/>
+        <property name="habitacionDAO" ref="habitacionDAO"/>
+    </bean>
+    
+    <bean id="usuarioService" class="es.duducand.tic.tac.rooms.service.impl.UsuarioService">
+        <property name="estadoUsuario" ref="estadoUsuario"/>
+        <property name="usuarioDao" ref="usuarioDAO" />
+    </bean>
+    
+    
+    
+    <!-- Spring Web MVC controller mappings -->
+    <import resource="classpath:/spring-configuration/spring-context-presentacion.xml"/>
+</beans>

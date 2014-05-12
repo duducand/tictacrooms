@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.8.1.201111220115-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/main/resources/spring-configuration/tic-tac-rooms-servlet.xml</config>
+		<config>src/main/resources/spring-configuration/security-app-context.xml</config>
+		<config>src/main/resources/spring-configuration/spring-context-database.xml</config>
+		<config>src/main/resources/spring-configuration/spring-context-presentacion.xml</config>
+		<config>src/main/resources/spring-configuration/spring-context-seguridad.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

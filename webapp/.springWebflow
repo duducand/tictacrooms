@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.8.1.201111220115-RELEASE]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/main/webapp/WEB-INF/flows/contenidos/contenidos.xml</file>
+			<name><![CDATA[contenidos]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/flows/cuenta/cuenta.xml</file>
+			<name><![CDATA[cuenta]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/flows/inicio/inicio.xml</file>
+			<name><![CDATA[inicio]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/flows/login/login.xml</file>
+			<name><![CDATA[login]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/flows/usuarios/usuarios.xml</file>
+			<name><![CDATA[usuarios]]></name>
+		</config>
+	</configs>
+</webflow-project-description>

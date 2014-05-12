@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<subflow-state id="login" subflow="login">
+		<transition on="fin" to="consulta" />
+	</subflow-state>
+    
+    <view-state id="consulta" view="consulta-micuenta" model="usuario">
+        <on-entry>
+            <evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.getUsuario(estadoUsuario.getUsuario().getId()) : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="editar" to="edicion"/>
+	</view-state>
+	
+    <view-state id="edicion" view="usuarios-edicion" model="usuario">
+        <on-entry>
+          <evaluate expression="(currentEvent.attributes.usuario == null) ? usuarioService.getUsuario(estadoUsuario.getUsuario().getId()) : currentEvent.attributes.usuario" result="viewScope.usuario"/>
+        </on-entry>
+        <transition on="guardar" to="edicion-guardar">
+        	 <set name="requestScope.usuario" value="usuario"/> 
+        </transition>
+        <transition on="cancelar" to="edicion" />
+    </view-state>
+    
+    <action-state id="edicion-guardar">
+       	<evaluate expression="usuarioAction.saveUsuario(usuario, flowRequestContext)" />
+       	<transition on="GUARDADO" to="edicion" />
+       	<transition on="CODIGO_ACTIVO" to="edicion" />
+       	<transition on="CODIGO_BAJA" to="edicion" />
+    </action-state>
+	<view-state id="excepcion" view="excepcion" />
+	
+	<global-transitions>
+		<transition on-exception="java.lang.Exception" to="excepcion" />
+	</global-transitions>
+	
+</flow>

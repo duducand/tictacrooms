@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<definition name="structure" template="/WEB-INF/tiles/jsp/structure.jsp" />
+    <definition name="structure-externo" template="/WEB-INF/tiles/jsp/structure-externo.jsp" />
+	
+	<definition name="excepcion" extends="structure">
+		<put-attribute name="title" value="excepcion.titulo" />
+		<put-attribute name="javascript" value="" />
+		<put-attribute name="content" value="/WEB-INF/tiles/jsp/excepcion.jsp" />
+	</definition>
+  
+    <definition name="error-seguridad" extends="structure">
+        <put-attribute name="title" value="excepcion.seguridad.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/excepcion-seguridad.jsp" />
+    </definition>
+	
+
+
+    
+    
+    <!-- Usuarios -->            
+    <definition name="usuarios" extends="structure">
+        <put-attribute name="title" value="usuarios.titulo" />
+        <put-attribute name="javascript" value="/WEB-INF/tiles/jsp/usuarios/lista.js.jsp" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/usuarios/lista.jsp" />
+    </definition>
+    
+    <definition name="usuarios-creacion" extends="structure">
+        <put-attribute name="title" value="usuarios-creacion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content">
+            <definition template="/WEB-INF/tiles/jsp/usuarios/edicion.jsp">
+                <put-attribute name="titulo" value="usuarios-creacion.titulo"/>
+            </definition>
+        </put-attribute>
+    </definition>
+    
+    <definition name="usuarios-creacion-externo" extends="structure-externo">
+        <put-attribute name="title" value="usuarios-creacion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content">
+            <definition template="/WEB-INF/tiles/jsp/usuarios/edicion.jsp">
+                <put-attribute name="titulo" value="usuarios-creacion.titulo"/>
+            </definition>
+        </put-attribute>
+    </definition>
+    
+    <definition name="usuarios-consulta" extends="structure">
+        <put-attribute name="title" value="usuarios-consulta.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/usuarios/consulta.jsp" />
+    </definition>
+    
+    <definition name="consulta-micuenta" extends="structure">
+        <put-attribute name="title" value="usuarios-consulta-micuenta.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/usuarios/consulta-micuenta.jsp" />
+    </definition>
+    
+    <definition name="usuarios-edicion" extends="structure">
+        <put-attribute name="title" value="usuarios-edicion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content">
+            <definition template="/WEB-INF/tiles/jsp/usuarios/edicion.jsp">
+                <put-attribute name="titulo" value="usuarios-edicion.titulo"/>
+            </definition>
+        </put-attribute>
+    </definition>
+
+    <definition name="usuarios-eliminacion" extends="structure">
+        <put-attribute name="title" value="usuarios-eliminacion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/usuarios/eliminacion.jsp" />
+    </definition>
+
+    <definition name="usuarios-reactivacion" extends="structure">
+        <put-attribute name="title" value="usuarios-reactivacion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/usuarios/reactivacion.jsp" />
+    </definition>
+    <!-- habitaciones -->
+    <definition name="habitaciones" extends="structure">
+        <put-attribute name="title" value="tic-tac-rooms.msg.habitaciones.titulo" />
+        <put-attribute name="javascript" value="/WEB-INF/tiles/jsp/habitaciones/lista.js.jsp" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/habitaciones/lista.jsp" />
+    </definition>
+    
+    <definition name="habitaciones-consulta" extends="structure">
+        <put-attribute name="title" value="tic-tac-rooms.msg.habitaciones-consulta.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content" value="/WEB-INF/tiles/jsp/habitaciones/consulta.jsp" />
+    </definition>
+    
+    <definition name="habitaciones-edicion" extends="structure">
+        <put-attribute name="title" value="tic-tac-rooms.msg.habitaciones-edicion.titulo" />
+        <put-attribute name="javascript" value="" />
+        <put-attribute name="content">
+            <definition template="/WEB-INF/tiles/jsp/habitaciones/edicion.jsp">
+                <put-attribute name="titulo" value="tic-tac-rooms.msg.habitaciones-edicion.titulo"/>
+            </definition>
+        </put-attribute>
+    </definition>
+    
+    
+	
+</tiles-definitions>

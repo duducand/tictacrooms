@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  
+    <table name="usuario">
+    <column>id</column>
+    <column>login</column>
+    <column>claveUsuario</column>
+    <column>nombre</column>
+    <column>apellidos</column>
+    <column>direccion</column>
+    <column>poblacion</column>
+    <column>provincia</column>
+    <column>codigoPostal</column>
+    <column>cuentaBancaria</column>
+    <column>email</column>
+    <column>socio</column>
+    <column>trabajador</column>
+    <column>administrador</column>
+    <row>
+      <value>1</value>
+      <value>socio</value>
+      <value>socio</value>
+      <value>Juan</value>
+      <value>Garcia</value>
+      <value>C/Mayor 1</value>
+      <value>Madrid</value>
+      <value>Madrid</value>
+      <value>28001</value>
+      <value>12345678901234567890</value>
+      <value>socio@mail.com</value>
+      <value>true</value>
+      <value>false</value>
+      <value>false</value>
+    </row>
+    <row>
+      <value>2</value>
+      <value>trabajador</value>
+      <value>trabajador</value>
+      <value>Alberto</value>
+      <value>Ramirez</value>
+      <value>C/Castellana 1</value>
+      <value>Madrid</value>
+      <value>Madrid</value>
+      <value>28001</value>
+      <value>12345678901234567890</value>
+      <value>trabajador@mail.com</value>
+      <value>false</value>
+      <value>true</value>
+      <value>false</value>
+    </row>
+    <row>
+      <value>3</value>
+      <value>administrador</value>
+      <value>administrador</value>
+      <value>Roberto</value>
+      <value>Perez</value>
+      <value>C/Gran via 1</value>
+      <value>Madrid</value>
+      <value>Madrid</value>
+      <value>28001</value>
+      <value>12345678901234567890</value>
+      <value>administrador@mail.com</value>
+      <value>false</value>
+      <value>false</value>
+      <value>true</value>
+    </row>
+  </table>
+  
+   
+   <table name="HABITACION">
+    <column>id</column>
+   	<column>precio</column>
+	<column>direccion</column>
+    <row>
+      <value>1</value>
+      <value>10</value>
+      <value>C/</value>
+    </row>
+    <row>
+      <value>2</value>
+      <value>34</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+    <row>
+      <value>3</value>
+      <value>54</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+    <row>
+      <value>4</value>
+      <value>23</value>
+      <value>C/Castellana</value>
+    </row>
+    <row>
+      <value>5</value>
+      <value>67</value>
+      <value>C/Castellana</value>
+    </row>
+	<row>
+      <value>6</value>
+      <value>45</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+    <row>
+      <value>7</value>
+      <value>76</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>8</value>
+      <value>787</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>9</value>
+      <value>323</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>10</value>
+      <value>23</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>11</value>
+      <value>142</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>12</value>
+      <value>234</value>
+      <value>C/Castellana</value>
+    </row>
+		<row>
+      <value>13</value>
+      <value>334</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>14</value>
+      <value>4545</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>15</value>
+      <value>45</value>
+      <value>C/de Brasil</value>
+    </row>
+	<row>
+      <value>16</value>
+      <value>545</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>17</value>
+      <value>545</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>18</value>
+      <value>34</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+		<row>
+      <value>19</value>
+      <value>454</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>20</value>
+      <value>54</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+		<row>
+      <value>21</value>
+      <value>45</value>
+      <value>C/Castellana</value>
+    </row>
+		<row>
+      <value>22</value>
+      <value>43</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>23</value>
+      <value>5454</value>
+      <value>C/americano</value>
+    </row>
+	<row>
+      <value>24</value>
+      <value>34</value>
+      <value>C/ Castellana</value>
+    </row>
+		<row>
+      <value>25</value>
+      <value>545</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+	<row>
+      <value>26</value>
+      <value>655</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+		<row>
+      <value>27</value>
+      <value>45</value>
+      <value>C/Goya 45, Madrid</value>
+    </row>
+		<row>
+      <value>28</value>
+      <value>454</value>
+      <value>C/Castellana</value>
+    </row>
+	<row>
+      <value>29</value>
+      <value>45</value>
+      <value>C/jhkjhkhjkhjkhj</value>
+    </row>
+	<row>
+      <value>30</value>
+      <value>342</value>
+      <value>C/dfgdfgd</value>
+    </row>
+		<row>
+      <value>31</value>
+      <value>565</value>
+      <value>C/tryrtrrrt</value>
+    </row>
+		<row>
+      <value>32</value>
+      <value>23</value>
+      <value>C/dsfdsfsdf</value>
+    </row>
+	<row>
+      <value>33</value>
+      <value>45</value>
+      <value>C/dasdad</value>
+    </row>
+   </table> 
+   
+   
+ </dataset>

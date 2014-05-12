@@ -1,0 +1,12 @@
+a56 11
+			var timePattern = this.widgetAttrs['timePattern'];
+			if (timePattern && this.widgetType == 'dijit.form.TimeTextBox') {
+				if (!this.widgetAttrs['value']) {
+					this.widgetAttrs['value'] = dojo.date.locale.parse(element.value, {selector : "time", timePattern : timePattern});
+				}
+				if (!this.widgetAttrs['serialize']) {
+					this.widgetAttrs['serialize'] = function(d, options){
+						return dojo.date.locale.format(d, {selector : "time", timePattern : timePattern});
+					}
+				}
+			}
